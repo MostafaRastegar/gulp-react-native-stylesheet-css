@@ -1,12 +1,12 @@
-# gulp-react-native-stylesheet-css
+# hgs-gulp-react-native-stylesheet-css
 
 Gulp plugin for converting CSS files to React Native StyleSheets.
-
+this package fork from `gulp-react-native-stylesheet-css`
 
 ## Install
 
 ```
-npm install gulp-react-native-stylesheet-css --save-dev
+npm install hgs-gulp-react-native-stylesheet-css --save-dev
 ```
 
 You can use it with [react-native-extended-stylesheet](https://github.com/vitalets/react-native-extended-stylesheet)
@@ -15,14 +15,15 @@ You can use it with [react-native-extended-stylesheet](https://github.com/vitale
 
 ```javascript
 var gulp = require('gulp'),
-    sass = require('gulp-sass'),
-    reactNativeStylesheetCss = require('gulp-react-native-stylesheet-css');
+  sass = require('gulp-sass'),
+  reactNativeStylesheetCss = require('gulp-react-native-stylesheet-css');
 
-gulp.task('styles', function() {
-    gulp.src('./src/sass/*.scss')
-        .pipe(sass())
-        .pipe(reactNativeStylesheetCss())
-        .pipe(gulp.dest('./dist/sass/'));
+gulp.task('styles', function () {
+  gulp
+    .src('./src/sass/*.scss')
+    .pipe(sass())
+    .pipe(reactNativeStylesheetCss())
+    .pipe(gulp.dest('./dist/sass/'));
 });
 ```
 
@@ -32,22 +33,22 @@ SASS or any other CSS preprocessor is not required. Plain .CSS files may be used
 
 Example using SASS as a preprocessor:
 
-__Input__
+**Input**
 
 ```scss
 #header {
-    margin-bottom: 20;
-    box-shadow: 0 2px 4px rgba(52, 21, 23, 0.32);
+  margin-bottom: 20;
+  box-shadow: 0 2px 4px rgba(52, 21, 23, 0.32);
 
-    .btn {
-        padding: 3 8;
-        text-align: center;
-        transform: scale(0.8) translateY(4px) rotate3d(20deg, 5deg, 10deg);
-    }
+  .btn {
+    padding: 3 8;
+    text-align: center;
+    transform: scale(0.8) translateY(4px) rotate3d(20deg, 5deg, 10deg);
+  }
 }
 ```
 
-__Output__
+**Output**
 
 ```javascript
 var React = require('react-native');
@@ -88,13 +89,13 @@ Any property found in your CSS will be camelCased. By default, this plugin will 
 
 The following properties output different keys to satisfy React Native's requirements. Unless otherwise noted, the values for each correspond with CSS3.
 
-Property | Example Values | Notes
----------|----------------|------
-margin | 2px<br />2px 4px<br />3px 1px 5px<br />1px 3px 2px 6px |
-padding | 2px<br />2px 4px<br />3px 1px 5px<br />1px 3px 2px 6px |
-box-shadow | none<br />0 2px 4px rgba(52, 21, 23, 0.32) | Inset shadows and spread values are not supported.
-flex | 1<br />1 30px<br />1 2 10% | __Only the first value will be output__ and the rest will be ignored, as React Native does not support flex-basis or flex-shrink.
-transform | perspective(90)<br />rotate(10deg)<br />rotateX(5deg)<br />rotateY(10deg)<br />rotateZ(15deg)<br />rotate3d(5deg, 10deg, 15deg)<br />scale(1.2)<br />scaleX(1.5)<br />scaleY(0.5)<br />scale2d(1.5, 0.5) or scale3d(1.5, 0.5)<br />translateX(5px)<br />translateY(10px)<br />translate2d(5px, 10px) or translate3d(5px, 10px) | You may chain multiple transformations together with a space delimiter, like in CSS3 (see example above).
+| Property   | Example Values                                                                                                                                                                                                                                                                                                                 | Notes                                                                                                                             |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| margin     | 2px<br />2px 4px<br />3px 1px 5px<br />1px 3px 2px 6px                                                                                                                                                                                                                                                                         |
+| padding    | 2px<br />2px 4px<br />3px 1px 5px<br />1px 3px 2px 6px                                                                                                                                                                                                                                                                         |
+| box-shadow | none<br />0 2px 4px rgba(52, 21, 23, 0.32)                                                                                                                                                                                                                                                                                     | Inset shadows and spread values are not supported.                                                                                |
+| flex       | 1<br />1 30px<br />1 2 10%                                                                                                                                                                                                                                                                                                     | **Only the first value will be output** and the rest will be ignored, as React Native does not support flex-basis or flex-shrink. |
+| transform  | perspective(90)<br />rotate(10deg)<br />rotateX(5deg)<br />rotateY(10deg)<br />rotateZ(15deg)<br />rotate3d(5deg, 10deg, 15deg)<br />scale(1.2)<br />scaleX(1.5)<br />scaleY(0.5)<br />scale2d(1.5, 0.5) or scale3d(1.5, 0.5)<br />translateX(5px)<br />translateY(10px)<br />translate2d(5px, 10px) or translate3d(5px, 10px) | You may chain multiple transformations together with a space delimiter, like in CSS3 (see example above).                         |
 
 ## Options
 
@@ -107,13 +108,13 @@ Additional options can be passed to the plugin to customize its output. For exam
     ...
 ```
 
-__Supported options:__
+**Supported options:**
 
-Option | Values | Default | Notes
--------|--------|---------|------
-outputPlainObject | Boolean | false | If true, the final output will be only an object of style rules, without requiring React or building a React StyleSheet object.
-withExtendedStyleSheet | Boolean | false | Support for [react-native-extended-stylesheet](https://github.com/vitalets/react-native-extended-stylesheet)
-module | String | es6 | default support es6, if `commonjs`, it will create js for commonjs mudule.
+| Option                 | Values  | Default | Notes                                                                                                                           |
+| ---------------------- | ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| outputPlainObject      | Boolean | false   | If true, the final output will be only an object of style rules, without requiring React or building a React StyleSheet object. |
+| withExtendedStyleSheet | Boolean | false   | Support for [react-native-extended-stylesheet](https://github.com/vitalets/react-native-extended-stylesheet)                    |
+| module                 | String  | es6     | default support es6, if `commonjs`, it will create js for commonjs mudule.                                                      |
 
 ## About
 
